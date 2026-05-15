@@ -6,16 +6,14 @@ import { CategoriaModule } from './categorias/categoria.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'db_farmacia',
-      entities: [Categoria],
-      synchronize: true,
-      logging: true,
-    }),
+    type: 'postgres',
+    url: process.env.DATABASE_URL,
+    ssl: {
+    rejectUnauthorized: false,
+  },
+  autoLoadEntities: true,
+  synchronize: true,
+}),
     CategoriaModule,
   ],
   controllers: [],
