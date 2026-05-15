@@ -4,15 +4,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'db_farmacia',
-      entities: [],
-      synchronize: true,
-    }),
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false,
+  },
+    autoLoadEntities: true,
+    synchronize: true,
+}),
   ],
   controllers: [],
   providers: [],
